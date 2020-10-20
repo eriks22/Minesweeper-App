@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name=viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erik's Minesweeper</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HTML layout from Pavol's lights out project -->
+    <header>Erik's Minesweeper Project</header>
+    <!-- Menu class to display difficulty options -->
+    <div class ="menu">
+        <div class="menuButton" data-size="8x10"></div>
+        <div class="menuButton" data-size="14x18"></div>
+        <div class="menuButton" data-size="20x24"></div>
+    </div>
+    <!-- Grid for the mines (game board) -->
+    <div class="gridWrapper">
+        <!-- I believe javascript spawns these guys in -->
+        <div class="grid">
+        </div>
+    </div>
+
+        <!-- TODO add in timer? -->
+        <div class="status">
+
+                Flags left:
+            <span class="moveCount">0</span>
+        </div>
+
+        <div id="overlay">
+            <div id="overlayin">
+                <p class="big glow">You won!</p>
+                <p class="darker">
+                    "It took you "
+                    <span class="moveCount">0</span>
+                    " moves."
+                </p>
+            </div>
+        </div>
+
+
+    <script src="index.js"></script>
+
+    <footer>Erik Skoronski - 30022537 - October 15, 2020</footer>
+</body>
+</html>

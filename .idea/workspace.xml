@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e80ccb25-ce60-4003-a0f1-20985e38d162" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1j7PiRSQynjNvumJcn7rneh702C" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/SENGAssg2_Minesweeper_v3/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/SENGAssg2_Minesweeper_v2/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e80ccb25-ce60-4003-a0f1-20985e38d162" name="Default Changelist" comment="" />
+      <created>1603152284042</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603152284042</updated>
+      <workItem from="1603152285112" duration="7554000" />
+      <workItem from="1603214407670" duration="3687000" />
+      <workItem from="1603218617882" duration="5281000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-56" y="-867" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603218641532">
+      <screen x="-480" y="-1057" width="1920" height="1057" />
+    </state>
+    <state x="-56" y="-867" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877/-480.-1057.1920.1057/1440.-1057.1920.1057@-480.-1057.1920.1057" timestamp="1603218641532" />
+    <state x="628" y="-822" width="670" height="676" key="search.everywhere.popup" timestamp="1603221425961">
+      <screen x="-480" y="-1057" width="1920" height="1057" />
+    </state>
+    <state x="628" y="-822" width="670" height="676" key="search.everywhere.popup/0.23.1440.877/-480.-1057.1920.1057/1440.-1057.1920.1057@-480.-1057.1920.1057" timestamp="1603221425961" />
+  </component>
+</project>
