@@ -1,11 +1,11 @@
 * {
     /*font-size: 24px;*/
     font-family: sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 body {
-    background: #ffffff;
+    background: #f58b57;
     /*padding: 0;*/
     /*margin: 0;*/
     display: flex;
@@ -19,7 +19,8 @@ body {
 
 /*TODO .. what should change in card css?*/
 .card {
-    background-image: url(covered_square.png);
+    /*background-image: url(covered_square.png);*/
+    background-color: #a75f3b;
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -42,7 +43,8 @@ body {
 }
 
 .card.flagged {
-    background-image: url(flag_icon.png);
+    background-image: url(flag_icon_blank.png);
+    background-color: #a75f3b;
     /*opacity: 0;*/
     transform: rotateY(0deg);
     /*font-size: 3vh;*/
@@ -50,9 +52,14 @@ body {
 
 }
 
+.card.flagged.cardDisplay:hover {
+    opacity: 70%;
+}
+
 .card.flipped {
-    background-image: url(uncovered_square.png);
-    opacity: 1;
+    /*background-image: url(uncovered_square.png);*/
+    background-color: #e6dfcc;
+    /*opacity: 1;*/
     /*transform: rotateY(360deg);*/
     /*font-size: 3vh;*/
     text-align: center;
@@ -66,7 +73,7 @@ body {
     border-radius: 10px;
     padding:5px;
     width: calc(70vh);
-    background-color: grey;
+    background-color: #412517;
 }
 
 /*.grid > div::before {*/
@@ -115,7 +122,7 @@ body {
 .menuButton {
     padding: 5px 0.5em;
     border: 0px solid gray;
-    background-color: rgba(128, 128, 128, 0.223);
+    background-color: rgba(128, 128, 128, 0.22);
     margin: 5px;
     cursor: pointer;
     border-radius: 0.5em;
@@ -125,7 +132,7 @@ body {
 .menuButton:hover {
     color: white;
     background: black;
-    opacity: 90%;
+    opacity: 60%;
 }
 
 .gridWrapper {
@@ -153,19 +160,28 @@ body {
     animation-fill-mode: forwards;
 }
 
-#overlay.win, #overlay.lose * {
-    pointer-events: none;
+#overlay-win.active{
+    background-image: url(kanye-madison-square-garden.jpg);
+    visibility: visible;
+    animation: fadeIn 1s;
+    animation-fill-mode: forwards;
 }
 
-#overlay-win.active, #overlay-lose.active {
+#overlay-lose.active {
+    display: flex;
+    background-image: url(kanye-sad.jpg);
     visibility: visible;
     animation: fadeIn 0.5s;
     animation-fill-mode: forwards;
 }
 
+#overlay.win, #overlay.lose * {
+    pointer-events: none;
+}
+
 #overlayin.win, #overlayin.lose {
     padding: 1em;
-    padding-left: 4em;
+    padding-left: 4e®m;
     padding-right: 4em;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
@@ -178,6 +194,7 @@ body {
 }
 
 #overlayin-win, #overlayin-lose p {
+
     text-align: center;
     font-size: 1em;
 }
@@ -194,13 +211,19 @@ p.glow {
     animation: glow 1s infinite alternate-reverse;
 }
 
-#overlay.active #overlayin {
+#overlay-win.active #overlayin-win {
     opacity: 0;
     animation: spinIn 1s ease-in-out;
     animation-fill-mode: forwards;
 }
 
-#overlayin * {
+#overlay-lose.active #overlayin-lose {
+    opacity: 0;
+    animation: spinIn 1s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+#overlayin-win, #overlayin-lose * {
     margin: 0px;
 }
 
@@ -279,16 +302,17 @@ p.glow {
 /*}*/
 
 header {
-    text-align: center;
+    /*text-align: center;*/
 }
-footer {
+header, footer {
+    background-color: #e6dfcc;
     display: block;
     margin: 4px;
     padding: 5px;
     /*min-height: 50px;*/
-    border: 1px solid green;
+    border: 5px #412517;
     width: 100%;
-    color: dimgrey;
+    color: #412517;
     text-align: center;
     /*line-height: 5%;*/
     /*vertical-align: center;*/
