@@ -1,31 +1,69 @@
 //"use strict";
 window.addEventListener('load', main);
 
+
 function prepare_dom(s) {
-    const grid = document.querySelector(".grid");
-    const nCards = 20 * 24; // max grid size
-    for (let i = 0; i < nCards; i++) {
+    $(document).ready(function() {
+        console.log("preparing DOM");
+        const grid = document.querySelector(".grid");
+        const nCards = 20 * 24; // max grid size
+        for (let i = 0; i < nCards; i++) {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.setAttribute("data-cardInd", i);
+            // card.addEventListener("click", () => {
+            //     card_click_cb( s, card, i);
+            // });
+            // card.addEventListener("contextmenu", () => {
+            //     card_right_click_cb(s, card, i);
+            // });
+            grid.appendChild(card);
 
-        const card = document.createElement("div");
-        card.className = "card";
-        card.setAttribute("data-cardInd", i);
-        card.addEventListener("click", () => {
-            card_click_cb( s, card, i);
+
+
+            const recentlyAddedCard = grid.children[i];
+            const cardDisplay = document.createElement("div");
+            cardDisplay.className = "cardDisplay";
+            recentlyAddedCard.appendChild(cardDisplay);
+
+            // console.log("appended child at " + i);
+        }
+        // trying this with jquery
+        console.log("adding jQuery click functions");
+        // $(".card").on({
+        //     click: function() {
+        //         // console.log("adding function with jquery");
+        //         card_click_cb( s, $(this).attr('data-cardInd'));
+        //         },
+        //     "taphold": function() {
+        //         card_right_click_cb(s, $(this).attr('data-cardInd'));
+        //     }
+        // });
+        $(document).on("mousedown",".card",function(){
+            $(this).removeClass("taphold_Flag");
         });
-        card.addEventListener("contextmenu", () => {
-            card_right_click_cb( s, card, i);
+
+        console.log("adding left click function with jquery");
+        $(document).on("tap",".card",function(){
+            console.log("I am a tap event!");
+            console.log($(this).hasClass("flagged"));
+            console.log("taphold_Flag: " + !$(this).has("taphold_Flag"));
+            if( ! $(this).hasClass("flagged") ) {
+                if ( ! $(this).hasClass("taphold_Flag") ) {
+                    card_click_cb(s, $(this).attr('data-cardInd'));
+                }
+            }
         });
-        grid.appendChild(card);
-
-        const recentlyAddedCard = grid.children[i];
-        const cardDisplay = document.createElement("div");
-        cardDisplay.className = "cardDisplay";
-        recentlyAddedCard.appendChild(cardDisplay);
-
-        // grid.insertBefore(card, cardDisplay);
-
-
-    }
+        console.log("adding right click function with jquery");
+        $(document).on("taphold",".card",function(){
+            console.log("I am a taphold event!");
+            // card_div.classList.toggle("flagged");
+            // toggle flag class
+            $(this).toggleClass("flagged");
+            $(this).addClass("taphold_Flag");
+            card_right_click_cb(s, $(this).attr('data-cardInd'));
+        });
+    });
 }
 
 function render(s) {
@@ -46,12 +84,12 @@ function render(s) {
             if (gameRendering.charAt(ind) !== "H") {
                 if (gameRendering.charAt(ind) === "F") {
                     // If square has been flagged
-                    // card.classList.add("flagged");
+                    card.classList.add("flagged");
                 }
                 else {
                 // Square has not been flagged
 
-                console.log("flipping card at index" + ind + "that engine shows" + gameRendering.charAt(ind));
+                //console.log("flipping card at index" + ind + "that engine shows" + gameRendering.charAt(ind));
                 card.classList.remove("flagged");
                 card.classList.add("flipped");
                 let newChar = gameRendering.charAt(ind);
@@ -89,7 +127,7 @@ function addFlag(s, col, row) {
     s.game.mark(row, col);
 }
 
-function make_solvable(s, ncols, nrows) {
+function make_solvable(s) {
     // Start new game
     s.moves = 0;
     s.onoff = [];
@@ -117,24 +155,34 @@ function make_solvable(s, ncols, nrows) {
 
         }
     }
-
+    // const music = document.querySelector("audio");
+    // music.play();
 }
 
 // Handle right-clicking a square
-function card_right_click_cb(s, card_div, ind) {
+// function card_right_click_cb(s, card_div, ind) {
+function card_right_click_cb(s, ind ) {
+    console.log("i am a taphold event");
     const col = ind % s.cols;
     const row = Math.floor(ind / s.cols);
     console.log("right click happened at index " + ind);
-    card_div.classList.toggle("flagged");
+
+    // card_div.classList.toggle("flagged");
     addFlag(s, col, row);
     render(s);
 
 }
 
 // Handle left-clicking a square
-function card_click_cb(s, card_div, ind) {
+// function card_click_cb(s, card_div, ind) {
+function card_click_cb(s, ind) {
+    // let ind = $(this).attr('data-cardInd');
+    console.log("ind is: "+ind);
+
     const col = ind % s.cols;
+    // const col = s.cols;
     const row = Math.floor(ind / s.cols);
+    // const row = s.rows;
     // card_div.classList.add("flipped");
     // if square not flagged
     if(s.game.getRendering().join("").charAt(ind) !== "F")
@@ -172,6 +220,26 @@ function button_cb(s, rows, cols) {
     render(s)
 }
 
+// Starts background music
+// With help from https://www.w3schools.com/graphics/game_sound.asp
+function startBackgroundMusic(s, src) {
+    this.sound = document.createElement("audio");
+    console.log(src);
+    this.sound.src = src;
+    // this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.sound.play();
+    this.play = function() {
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }
+
+}
+
 function main() {
 
     // create state object
@@ -181,7 +249,8 @@ function main() {
         nmines: null,
         moves: 0,
         onoff: [],
-        game: MSGame
+        game: MSGame,
+        mySound: null
     }
 
     // get browser dimensions - not used in this code
@@ -193,7 +262,7 @@ function main() {
     document.querySelectorAll(".menuButton").forEach((button) => {
         // make row and column dimensions from the "NxM" text found in the menu icon ???
         [rows, cols] = button.getAttribute("data-size").split("x").map(s=>Number(s));
-        let gameMode = "";
+        let gameMode;
         if (rows > 19) {
             gameMode = "hard";
             state.nmines = 25;
@@ -206,6 +275,8 @@ function main() {
         }
         button.innerHTML = `${gameMode}`;
         button.addEventListener("click", button_cb.bind(null, state, rows, cols));
+        // button.bind("click", button_cb(null, state, rows, cols));
+
     });
 
     // Callback for overlay click - hide overlay and regen game
@@ -220,12 +291,19 @@ function main() {
         button_cb(state, state.rows, state.cols);
     });
 
+    //start music
+
 
     // sound callback
     // TODO Implement this (sound callback) when (if) I implement sound
+    let mySound = new Audio("ultralight-beam-instrumentalfx.m4a");
+    // mySound.play();
+    // startBackgroundMusic(state, mySound);
+    // state.mySound = mySound;
 
 
     // Create enough squares for largest game and register click callbacks
+
     prepare_dom(state);
 
     // simulate pressing Easy button to start new game
@@ -314,7 +392,7 @@ let MSGame = (function(){
                     this.arr[r][c].count = this.count(r,c);
                 }
             }
-            let mines = []; let counts = [];
+            let mines = []; //let counts = [];
             for(let row = 0 ; row < this.nrows ; row ++ ) {
                 let s = "";
                 for( let col = 0 ; col < this.ncols ; col ++ ) {
@@ -349,7 +427,7 @@ let MSGame = (function(){
                 this.nuncovered ++;
                 if( this.arr[r][c].count !== 0) return;
                 ff(r-1,c-1);ff(r-1,c);ff(r-1,c+1);
-                ff(r  ,c-1);         ;ff(r  ,c+1);
+                ff(r  ,c-1);         ff(r  ,c+1);
                 ff(r+1,c-1);ff(r+1,c);ff(r+1,c+1);
             };
             ff(row,col);
