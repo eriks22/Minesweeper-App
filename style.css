@@ -135,7 +135,7 @@ body {
 }
 
 /* Overlay of board when player wins */
-#overlay {
+#overlay-win, #overlay-lose {
     position: fixed;
     top: 0;
     left: 0;
@@ -153,17 +153,17 @@ body {
     animation-fill-mode: forwards;
 }
 
-#overlay * {
+#overlay.win, #overlay.lose * {
     pointer-events: none;
 }
 
-#overlay.active {
+#overlay-win.active, #overlay-lose.active {
     visibility: visible;
     animation: fadeIn 0.5s;
     animation-fill-mode: forwards;
 }
 
-#overlayin {
+#overlayin.win, #overlayin.lose {
     padding: 1em;
     padding-left: 4em;
     padding-right: 4em;
@@ -177,7 +177,7 @@ body {
     box-shadow: 0 0 20px black;
 }
 
-#overlayin p {
+#overlayin-win, #overlayin-lose p {
     text-align: center;
     font-size: 1em;
 }

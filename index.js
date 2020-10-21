@@ -145,7 +145,9 @@ function card_click_cb(s, card_div, ind) {
     // TODO change this to check for losses too
     console.log(s.game.getStatus());
     if( s.game.getStatus().exploded === true) {
-        document.querySelector("#overlay").classList.toggle("active");
+        document.querySelector("#overlay-lose").classList.toggle("active");
+    } else if (s.game.getStatus().done) {
+        document.querySelector("#overlay-win").classList.toggle("active");
     }
     // TODO re-enable this for sound
     //clickSound.play();
@@ -208,10 +210,14 @@ function main() {
 
     // Callback for overlay click - hide overlay and regen game
     // TODO
-    document.querySelector("#overlay").addEventListener("click", () => {
-        document.querySelector("#overlay").classList.remove("active");
+    document.querySelector("#overlay-win").addEventListener("click", () => {
+        document.querySelector("#overlay-win").classList.remove("active");
         button_cb(state, state.rows, state.cols);
+    });
 
+    document.querySelector("#overlay-lose").addEventListener("click", () => {
+        document.querySelector("#overlay-lose").classList.remove("active");
+        button_cb(state, state.rows, state.cols);
     });
 
 
