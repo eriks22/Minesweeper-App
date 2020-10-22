@@ -50,8 +50,8 @@ function prepare_dom(s) {
         console.log("adding left click function with jquery");
         $(document).on("tap",".card",function(){
             console.log("I am a tap event!");
-            console.log($(this).hasClass("flagged"));
-            console.log("taphold_Flag: " + !$(this).has("taphold_Flag"));
+            // console.log($(this).hasClass("flagged"));
+            // console.log("taphold_Flag: " + !$(this).has("taphold_Flag"));
             if( ! $(this).hasClass("flagged") ) {
                 if ( ! $(this).hasClass("taphold_Flag") ) {
                     card_click_cb(s, $(this).attr('data-cardInd'));
@@ -180,6 +180,7 @@ function card_right_click_cb(s, ind ) {
 // Handle left-clicking a square
 // function card_click_cb(s, card_div, ind) {
 function card_click_cb(s, ind) {
+    s.mySound.play();
     // let ind = $(this).attr('data-cardInd');
     console.log("ind is: "+ind);
 
@@ -194,7 +195,6 @@ function card_click_cb(s, ind) {
     s.moves ++;
     render(s);
     // check if we won and activate overlay if we did
-    // TODO change this to check for losses too
     console.log(s.game.getStatus());
     if( s.game.getStatus().exploded === true) {
         document.querySelector("#overlay-lose").classList.toggle("active");
@@ -215,6 +215,7 @@ function card_click_cb(s, ind) {
  * @param rows
  */
 function button_cb(s, rows, cols) {
+
     s.game = new MSGame();
     s.game.init(rows,cols, Math.floor(rows*cols/8));
     console.log("initializing game!");
@@ -222,6 +223,7 @@ function button_cb(s, rows, cols) {
     s.rows = rows;
     make_solvable(s);
     render(s)
+    s.mySound.play();
 }
 
 // Starts background music
@@ -300,10 +302,15 @@ function main() {
 
     // sound callback
     // TODO Implement this (sound callback) when (if) I implement sound
-    let mySound = new Audio("ultralight-beam-instrumentalfx.m4a");
-    // mySound.play();
+    let mySound = document.createElement('audio');
+    mySound.setAttribute('src', "ultralight-beam-instrumentalfx.mp3");
+    mySound.setAttribute('muted', "true");
+    // let mySound = new Audio("ultralight-beam-instrumentalfx.m4a");
+
+
+
     // startBackgroundMusic(state, mySound);
-    // state.mySound = mySound;
+    state.mySound = mySound;
 
 
     // Create enough squares for largest game and register click callbacks

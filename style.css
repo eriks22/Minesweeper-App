@@ -5,7 +5,7 @@
 }
 
 body {
-    background: #f58b57;
+    background-color: #f58b57; !important;
     /*padding: 0;*/
     /*margin: 0;*/
     display: flex;
@@ -33,10 +33,10 @@ body {
     border: none;
     margin: 1px;
     transition:.25s;
-    opacity: 0.9;
+    /*opacity: 1;*/
     transform: rotateY(0deg);
 
-    animation: fadeIn 0.5s;
+    /*animation: fadeIn 0.5s;*/
     animation-fill-mode: forwards;
 }
 
@@ -111,9 +111,11 @@ body {
 .gridWrapper .grid .card .cardDisplay:hover {
     opacity: 70%;
     color: black;
+
 }
 
 .menu {
+    background-color: #f58b57; !important;
     display: flex;
     justify-content: center;
     margin-bottom: 0.5em;
@@ -138,6 +140,7 @@ body {
 }
 
 .gridWrapper {
+    background-color: #f58b57; !important;
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -163,10 +166,13 @@ body {
 }
 
 #overlay-win.active{
+    display: flex;
     background-image: url(kanye-madison-square-garden.jpg);
     visibility: visible;
     animation: fadeIn 1s;
     animation-fill-mode: forwards;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
 }
 
 #overlay-lose.active {
@@ -186,7 +192,7 @@ body {
 
 #overlayin.win, #overlayin.lose {
     padding: 1em;
-    padding-left: 4e®m;
+    padding-left: 4em;
     padding-right: 4em;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
@@ -205,11 +211,13 @@ body {
 }
 
 p.big {
-    font-size: 6em !important;
+    font-size: 8em !important;
+    color: #412517;
 }
 
 p.darker {
-    color: #aaa;
+    color: #412517;
+    font-size: 2em !important;
 }
 
 /*p.glow {*/
@@ -223,7 +231,7 @@ p.darker {
 }
 
 #overlay-lose.active #overlayin-lose {
-    background-color: #f58b57;
+    /*background-color: #f58b57;*/
     opacity: 0.5;
     animation: spinIn 1s ease-in-out;
     animation-fill-mode: forwards;
@@ -233,7 +241,8 @@ p.darker {
 .status {
     margin-top: 5px;
     text-align: center;
-    color: gray;
+    color: #412517;
+    background-color: #f58b57; !important;
 }
 
 @keyframes glow {
