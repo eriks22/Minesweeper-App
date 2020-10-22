@@ -28,7 +28,8 @@ function prepare_dom(s) {
 
             // console.log("appended child at " + i);
         }
-        // trying this with jquery
+
+        // bind functions with JQuery
         console.log("adding jQuery click functions");
         // $(".card").on({
         //     click: function() {
@@ -41,6 +42,9 @@ function prepare_dom(s) {
         // });
         $(document).on("mousedown",".card",function(){
             $(this).removeClass("taphold_Flag");
+
+            // make sure this works for desktop too..
+
         });
 
         console.log("adding left click function with jquery");
