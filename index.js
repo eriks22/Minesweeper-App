@@ -40,8 +40,32 @@ function prepare_dom(s) {
         //         card_right_click_cb(s, $(this).attr('data-cardInd'));
         //     }
         // });
-        $(document).on("mousedown",".card",function(){
+        $(document).on("mousedown",".card",function(e){
             $(this).removeClass("taphold_Flag");
+
+            switch(e.which) {
+                case 1:
+                    // left click
+                    console.log("I am a left mousedown event!");
+                    if( ! $(this).hasClass("flagged") ) {
+                        if ( ! $(this).hasClass("taphold_Flag") ) {
+                            card_click_cb(s, $(this).attr('data-cardInd'));
+                        }
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    // console.log("I am a taphold event!");
+                    // card_div.classList.toggle("flagged");
+                    // toggle flag class
+                    $(this).toggleClass("flagged");
+                    // $(this).addClass("taphold_Flag");
+                    card_right_click_cb(s, $(this).attr('data-cardInd'));
+                    break;
+                default:
+                    console.log("error in mousedown events");
+            }
 
             // make sure this works for desktop too..
 
@@ -256,7 +280,8 @@ function main() {
         moves: 0,
         onoff: [],
         game: MSGame,
-        mySound: null
+        mySound: null,
+        timer: null
     }
 
     // get browser dimensions - not used in this code
@@ -306,11 +331,59 @@ function main() {
     mySound.setAttribute('src', "ultralight-beam-instrumentalfx.mp3");
     mySound.setAttribute('muted', "true");
     // let mySound = new Audio("ultralight-beam-instrumentalfx.m4a");
-
-
-
     // startBackgroundMusic(state, mySound);
-    state.mySound = mySound;
+    state.mySound = mySound
+
+    // code for timer
+    let ss = document.getElementsByClassName("timer");
+    state.timer = ss;
+
+
+
+    // let timerArr = [];
+    [].forEach.call(ss,function(s) {
+        let currentTime = 0,
+            interval = 0,
+            lastUpdateTime = new Date().getTime(),
+            start = document.querySelector('.gridWrapper'),
+            // stop = document.querySelector('.menuButton'),
+            reset = document.querySelector('.menu .menuButton'),
+            reset2 = document.querySelector('#overlay-lose'),
+            reset3 = document.querySelector('#overlay-win'),
+            secs = document.querySelector('span.seconds')
+
+            console.log("start is: "+ start);
+        start.addEventListener('click',startTimer);
+        // stop.addEventListener('click',stopTimer);
+        reset.addEventListener('click',resetTimer);
+        reset2.addEventListener('click',resetTimer);
+        reset3.addEventListener('click',resetTimer);
+        function pad(n){
+            return('00' + n).substr(-2);
+        }
+        function update(){
+            var now = new Date().getTime(),
+                dt = now - lastUpdateTime;
+            currentTime = currentTime + dt;
+            var time = new Date(currentTime);
+            secs.innerHTML = pad(time.getSeconds());
+            lastUpdateTime = now;
+        }
+        function startTimer(){
+            if(!interval){
+                lastUpdateTime = new Date().getTime();
+                interval = setInterval(update,1);
+            }
+        }
+        function stopTimer(){
+            clearInterval(interval);
+            interval = 0;
+        }
+        function resetTimer(){
+            currentTime = 0;
+        }
+    });
+
 
 
     // Create enough squares for largest game and register click callbacks
